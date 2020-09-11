@@ -1,4 +1,8 @@
+//import 'dart:html';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:html/parser.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         // This is the theme of your application.
         //
-        // Try running your application with "flutter run". You'll see the
+        // Try running y5our application with "flutter run". You'll see the
         // application has a blue toolbar. Then, without quitting the app, try
         // changing the primarySwatch below to Colors.green and then invoke
         // "hot reload" (press "r" in the console where you ran "flutter run",
@@ -54,13 +58,20 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
       _counter++;
+      getData();
     });
+  }
+
+  void getData() async {
+    var url = "https://poezdato.net/raspisanie-poezdov/pinsk--brest/";
+    final response = await http.Client().get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      var document = parse(response.body);
+      var a = (document.getElementsByTagName("tr").length);
+    } else {
+      throw Exception();
+    }
   }
 
   @override
