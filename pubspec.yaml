@@ -23,11 +23,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  http: ^0.12.1
+  http: ^0.12.2
   html: ^0.14.0+3
+  flare_splash_screen: ^3.0.1
+  get: ^3.10.2
+  provider: ^4.3.2+2
 
-  
 
 dev_dependencies:
   flutter_test:
